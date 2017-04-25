@@ -56,7 +56,7 @@ class ViewController: UIViewController {
     
   }
 
-  @IBAction func addName(_ sender: UIBarButtonItem) {
+  @IBAction func addPerson(_ sender: UIBarButtonItem) {
 
     let alert = UIAlertController(title: "New Name",
                                   message: "Add a new name",
@@ -65,12 +65,14 @@ class ViewController: UIViewController {
     let saveAction = UIAlertAction(title: "Save", style: .default) { [unowned self] action in
 
       guard let nameTextField = alert.textFields?.first,
-            let nameToSave = nameTextField.text else {
+            let nameToSave = nameTextField.text,
+            let addressTextField = alert.textFields?[1],
+            let addressToSave = addressTextField.text else {
           return
       }
       
-
-      self.save(name: nameToSave)
+      self.save(name: nameToSave, address: addressToSave)
+      
       self.tableView.reloadData()
     }
 
@@ -78,8 +80,10 @@ class ViewController: UIViewController {
                                      style: .default)
 
     alert.addTextField()
+    alert.addTextField()
     
     alert.textFields?[0].placeholder = "Name"
+    alert.textFields?[1].placeholder = "Address"
 
     alert.addAction(saveAction)
     alert.addAction(cancelAction)
@@ -87,7 +91,7 @@ class ViewController: UIViewController {
     present(alert, animated: true)
   }
 
-  func save(name: String) {
+  func save(name: String, address: String) {
     
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
       return
@@ -98,6 +102,7 @@ class ViewController: UIViewController {
     let entity = NSEntityDescription.entity(forEntityName: "Person", in: managedContex)!
     let person = NSManagedObject(entity: entity, insertInto: managedContex)
     person.setValue(name, forKey: "name")
+    person.setValue(address, forKey: "address")
     
     do {
       try managedContex.save()
@@ -123,8 +128,10 @@ extension ViewController: UITableViewDataSource {
                                              for: indexPath)
     
     let person = people[indexPath.row]
+    let name  = person.value(forKey: "name") ?? "Name unknown"
+    let address = person.value(forKey: "address") ?? "Address unknown"
+    cell.textLabel?.text = "\(name) -- \(address)"
     
-    cell.textLabel?.text = person.value(forKey: "name") as! String?
     return cell
   }
 }
