@@ -26,7 +26,7 @@ import CoreData
 class ViewController: UIViewController {
 
   @IBOutlet weak var collectionView: UICollectionView!
-  var people: [NSManagedObject] = []
+  var people: [Person] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -51,10 +51,10 @@ class ViewController: UIViewController {
     }
 
     let managedContext = appDelegate.persistentContainer.viewContext
-    let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Person")
+    
     
     do {
-      people = try managedContext.fetch(fetchRequest)
+      people = try managedContext.fetch(Person.fetchRequest())
     } catch let error as NSError {
       print("Could not fetch. \(error), \(error.userInfo)")
     }
@@ -67,10 +67,13 @@ class ViewController: UIViewController {
     let saveAction = UIAlertAction(title: "Save", style: .default) { [unowned self] action in
 
       guard let nameToSave = alert.textFields?[0].text,
-            let addressToSave = alert.textFields?[1].text else {
+            let addressToSave = alert.textFields?[1].text,
+            let age = alert.textFields?[2].text,
+            let eyeColor = alert.textFields?[3].text,
+            let ageToSave = Int16(age) else {
           return
       }
-      
+      let eyeColorToSave = self.eyeColorFromString(eyeColor)
       self.save(name: nameToSave, address: addressToSave)
       self.collectionView.reloadData()
     }
@@ -87,6 +90,10 @@ class ViewController: UIViewController {
     alert.addAction(cancelAction)
 
     present(alert, animated: true)
+  }
+  
+  func eyeColorFromString(_ eyeColor: String) -> UIColor {
+    
   }
 
   func save(name: String, address: String) {
