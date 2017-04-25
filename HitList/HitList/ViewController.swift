@@ -74,7 +74,7 @@ class ViewController: UIViewController {
           return
       }
       let eyeColorToSave = self.eyeColorFromString(eyeColor)
-      self.save(name: nameToSave, address: addressToSave)
+      self.save(name: nameToSave, address: addressToSave, age: ageToSave, eyeColor: eyeColorToSave)
       self.collectionView.reloadData()
     }
 
@@ -117,21 +117,19 @@ class ViewController: UIViewController {
     }
   }
 
-  func save(name: String, address: String) {
+  func save(name: String, address: String, age: Int16, eyeColor: UIColor) {
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
       return
     }
     
     let managedContext = appDelegate.persistentContainer.viewContext
     
-    let entity = NSEntityDescription.entity(forEntityName: "Person",
-                                            in: managedContext)!
+    let person = Person(entity: Person.entity(), insertInto: managedContext)
     
-    let person = NSManagedObject(entity: entity,
-                                 insertInto: managedContext)
-    
-    person.setValue(name, forKeyPath: "name")
-    person.setValue(address, forKeyPath: "address")
+    person.name = name
+    person.address = address
+    person.age = age
+    person.eyeColor = eyeColor
     
     do {
       try managedContext.save()
