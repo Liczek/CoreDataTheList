@@ -38,6 +38,20 @@ class ViewController: UIViewController {
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+      return
+    }
+    
+    let managedContext = appDelegate.persistentContainer.viewContext
+    
+    let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Person")
+    
+    do {
+      people = try managedContext.fetch(fetchRequest)
+    } catch let error as NSError {
+      print("\(error) nie działa")
+    }
 
     
   }
@@ -54,6 +68,7 @@ class ViewController: UIViewController {
             let nameToSave = nameTextField.text else {
           return
       }
+      
 
       self.save(name: nameToSave)
       self.tableView.reloadData()
