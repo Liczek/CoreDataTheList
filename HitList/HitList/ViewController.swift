@@ -24,6 +24,8 @@ import UIKit
 import CoreData
 
 class ViewController: UIViewController {
+  
+  
 
   @IBOutlet weak var collectionView: UICollectionView!
   var people: [Person] = []
@@ -155,8 +157,10 @@ extension ViewController: UICollectionViewDataSource {
     let person = people[indexPath.row]
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! TargetCollectionViewCell
     
-    cell.nameLabel.text = person.value(forKey: "name") as! String?
-    cell.addressLabel.text = person.value(forKey: "address") as! String?
+    cell.nameLabel.text = person.name
+    cell.addressLabel.text = person.address
+    cell.ageLabel.text = String(person.age)
+    cell.eyeColorView.backgroundColor = person.eyeColor as! UIColor?
     
     return cell
   }
