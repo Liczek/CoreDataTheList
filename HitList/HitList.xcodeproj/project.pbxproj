@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		AE467D861DBF2E640033A07B /* TargetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE467D851DBF2E640033A07B /* TargetCollectionViewCell.swift */; };
+		C8FDFF551EAFE2580073870E /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FDFF531EAFE2580073870E /* Person+CoreDataClass.swift */; };
+		C8FDFF561EAFE2580073870E /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FDFF541EAFE2580073870E /* Person+CoreDataProperties.swift */; };
 		FEA624511D6A29610011CF8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA624501D6A29610011CF8F /* AppDelegate.swift */; };
 		FEA624531D6A29610011CF8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA624521D6A29610011CF8F /* ViewController.swift */; };
 		FEA624561D6A29610011CF8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEA624541D6A29610011CF8F /* Main.storyboard */; };
@@ -37,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		AE467D851DBF2E640033A07B /* TargetCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetCollectionViewCell.swift; sourceTree = "<group>"; };
+		C8FDFF531EAFE2580073870E /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C8FDFF541EAFE2580073870E /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FEA6244D1D6A29610011CF8F /* HitList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HitList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEA624501D6A29610011CF8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEA624521D6A29610011CF8F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +85,8 @@
 		FEA624441D6A29610011CF8F = {
 			isa = PBXGroup;
 			children = (
+				C8FDFF531EAFE2580073870E /* Person+CoreDataClass.swift */,
+				C8FDFF541EAFE2580073870E /* Person+CoreDataProperties.swift */,
 				FEA6244F1D6A29610011CF8F /* HitList */,
 				FEA624671D6A29610011CF8F /* HitListTests */,
 				FEA624721D6A29610011CF8F /* HitListUITests */,
@@ -196,7 +202,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Razeware;
 				TargetAttributes = {
 					FEA6244C1D6A29610011CF8F = {
@@ -269,6 +275,8 @@
 			files = (
 				FEA624591D6A29610011CF8F /* HitList.xcdatamodeld in Sources */,
 				FEA624531D6A29610011CF8F /* ViewController.swift in Sources */,
+				C8FDFF561EAFE2580073870E /* Person+CoreDataProperties.swift in Sources */,
+				C8FDFF551EAFE2580073870E /* Person+CoreDataClass.swift in Sources */,
 				FEA624511D6A29610011CF8F /* AppDelegate.swift in Sources */,
 				AE467D861DBF2E640033A07B /* TargetCollectionViewCell.swift in Sources */,
 			);
@@ -343,6 +351,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -393,6 +402,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
