@@ -82,9 +82,17 @@ class ViewController: UIViewController {
 
     alert.addTextField()
     alert.addTextField()
+    alert.addTextField()
+    alert.addTextField()
+
+    
 
     alert.textFields?[0].placeholder = "Name"
     alert.textFields?[1].placeholder = "Address"
+    alert.textFields?[2].placeholder = "Age"
+    alert.textFields?[3].placeholder = "Eye Color"
+
+    
 
     alert.addAction(saveAction)
     alert.addAction(cancelAction)
@@ -93,7 +101,20 @@ class ViewController: UIViewController {
   }
   
   func eyeColorFromString(_ eyeColor: String) -> UIColor {
-    
+    switch eyeColor {
+    case "Blue":
+      return UIColor.blue
+    case "Green":
+      return UIColor.green
+    case "Grey":
+      return UIColor.gray
+    case "Brown":
+      return UIColor.brown
+    case "Purple":
+      return UIColor.purple
+    default:
+      return UIColor.blue
+    }
   }
 
   func save(name: String, address: String) {
