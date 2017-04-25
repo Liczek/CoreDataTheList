@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C86740DD1EAFB59C00394A6B /* HitList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C86740DB1EAFB59C00394A6B /* HitList.xcdatamodeld */; };
+		AE467D861DBF2E640033A07B /* TargetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE467D851DBF2E640033A07B /* TargetCollectionViewCell.swift */; };
 		FEA624511D6A29610011CF8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA624501D6A29610011CF8F /* AppDelegate.swift */; };
 		FEA624531D6A29610011CF8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA624521D6A29610011CF8F /* ViewController.swift */; };
 		FEA624561D6A29610011CF8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEA624541D6A29610011CF8F /* Main.storyboard */; };
+		FEA624591D6A29610011CF8F /* HitList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FEA624571D6A29610011CF8F /* HitList.xcdatamodeld */; };
 		FEA6245B1D6A29610011CF8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEA6245A1D6A29610011CF8F /* Assets.xcassets */; };
 		FEA6245E1D6A29610011CF8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEA6245C1D6A29610011CF8F /* LaunchScreen.storyboard */; };
 		FEA624691D6A29610011CF8F /* HitListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA624681D6A29610011CF8F /* HitListTests.swift */; };
@@ -35,11 +36,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C86740DC1EAFB59C00394A6B /* HitList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HitList.xcdatamodel; sourceTree = "<group>"; };
+		AE467D851DBF2E640033A07B /* TargetCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetCollectionViewCell.swift; sourceTree = "<group>"; };
 		FEA6244D1D6A29610011CF8F /* HitList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HitList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEA624501D6A29610011CF8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEA624521D6A29610011CF8F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FEA624551D6A29610011CF8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FEA624581D6A29610011CF8F /* HitList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HitList.xcdatamodel; sourceTree = "<group>"; };
 		FEA6245A1D6A29610011CF8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FEA6245D1D6A29610011CF8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FEA6245F1D6A29610011CF8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -107,7 +109,8 @@
 				FEA6245A1D6A29610011CF8F /* Assets.xcassets */,
 				FEA6245C1D6A29610011CF8F /* LaunchScreen.storyboard */,
 				FEA6245F1D6A29610011CF8F /* Info.plist */,
-				C86740DB1EAFB59C00394A6B /* HitList.xcdatamodeld */,
+				FEA624571D6A29610011CF8F /* HitList.xcdatamodeld */,
+				AE467D851DBF2E640033A07B /* TargetCollectionViewCell.swift */,
 			);
 			path = HitList;
 			sourceTree = "<group>";
@@ -193,7 +196,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Razeware;
 				TargetAttributes = {
 					FEA6244C1D6A29610011CF8F = {
@@ -264,9 +267,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C86740DD1EAFB59C00394A6B /* HitList.xcdatamodeld in Sources */,
+				FEA624591D6A29610011CF8F /* HitList.xcdatamodeld in Sources */,
 				FEA624531D6A29610011CF8F /* ViewController.swift in Sources */,
 				FEA624511D6A29610011CF8F /* AppDelegate.swift in Sources */,
+				AE467D861DBF2E640033A07B /* TargetCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,7 +343,6 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -390,7 +393,6 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -536,12 +538,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		C86740DB1EAFB59C00394A6B /* HitList.xcdatamodeld */ = {
+		FEA624571D6A29610011CF8F /* HitList.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				C86740DC1EAFB59C00394A6B /* HitList.xcdatamodel */,
+				FEA624581D6A29610011CF8F /* HitList.xcdatamodel */,
 			);
-			currentVersion = C86740DC1EAFB59C00394A6B /* HitList.xcdatamodel */;
+			currentVersion = FEA624581D6A29610011CF8F /* HitList.xcdatamodel */;
 			path = HitList.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

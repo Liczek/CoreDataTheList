@@ -25,63 +25,61 @@ import CoreData
 
 class ViewController: UIViewController {
 
-  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var collectionView: UICollectionView!
   var people: [NSManagedObject] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
     title = "The List"
-    tableView.register(UITableViewCell.self,
-                       forCellReuseIdentifier: "Cell")
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .vertical
+    layout.itemSize = CGSize(width: self.view.bounds.size.width/2.0 - 16, height: 250)
+    
+    collectionView.dataSource = self
+    collectionView.setCollectionViewLayout(layout, animated: false)
+    collectionView.contentInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+    
+    collectionView.reloadData()
   }
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
+
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
       return
     }
-    
+
     let managedContext = appDelegate.persistentContainer.viewContext
-    
     let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Person")
     
     do {
       people = try managedContext.fetch(fetchRequest)
     } catch let error as NSError {
-      print("\(error) nie działa")
+      print("Could not fetch. \(error), \(error.userInfo)")
     }
-
-    
   }
 
   @IBAction func addPerson(_ sender: UIBarButtonItem) {
 
-    let alert = UIAlertController(title: "New Name",
-                                  message: "Add a new name",
-                                  preferredStyle: .alert)
+    let alert = UIAlertController(title: "New Person", message: "Add a new person", preferredStyle: .alert)
 
     let saveAction = UIAlertAction(title: "Save", style: .default) { [unowned self] action in
 
-      guard let nameTextField = alert.textFields?.first,
-            let nameToSave = nameTextField.text,
-            let addressTextField = alert.textFields?[1],
-            let addressToSave = addressTextField.text else {
+      guard let nameToSave = alert.textFields?[0].text,
+            let addressToSave = alert.textFields?[1].text else {
           return
       }
       
       self.save(name: nameToSave, address: addressToSave)
-      
-      self.tableView.reloadData()
+      self.collectionView.reloadData()
     }
 
-    let cancelAction = UIAlertAction(title: "Cancel",
-                                     style: .default)
+    let cancelAction = UIAlertAction(title: "Cancel", style: .default)
 
     alert.addTextField()
     alert.addTextField()
-    
+
     alert.textFields?[0].placeholder = "Name"
     alert.textFields?[1].placeholder = "Address"
 
@@ -92,45 +90,47 @@ class ViewController: UIViewController {
   }
 
   func save(name: String, address: String) {
-    
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
       return
     }
     
-    let managedContex = appDelegate.persistentContainer.viewContext
+    let managedContext = appDelegate.persistentContainer.viewContext
     
-    let entity = NSEntityDescription.entity(forEntityName: "Person", in: managedContex)!
-    let person = NSManagedObject(entity: entity, insertInto: managedContex)
-    person.setValue(name, forKey: "name")
-    person.setValue(address, forKey: "address")
+    let entity = NSEntityDescription.entity(forEntityName: "Person",
+                                            in: managedContext)!
+    
+    let person = NSManagedObject(entity: entity,
+                                 insertInto: managedContext)
+    
+    person.setValue(name, forKeyPath: "name")
+    person.setValue(address, forKeyPath: "address")
     
     do {
-      try managedContex.save()
+      try managedContext.save()
       people.append(person)
     } catch let error as NSError {
-      print(error)
+      print("Could not save. \(error), \(error.userInfo)")
     }
   }
 }
 
-// MARK: - UITableViewDataSource
-extension ViewController: UITableViewDataSource {
-
-  func tableView(_ tableView: UITableView,
-                 numberOfRowsInSection section: Int) -> Int {
+// MARK: - UICollectionViewDataSource
+extension ViewController: UICollectionViewDataSource {
+  
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return people.count
   }
-
-  func tableView(_ tableView: UITableView,
-                 cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-    let cell = tableView.dequeueReusableCell(withIdentifier: "Cell",
-                                             for: indexPath)
-    
+  
+  func numberOfSections(in collectionView: UICollectionView) -> Int {
+    return 1
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let person = people[indexPath.row]
-    let name  = person.value(forKey: "name") ?? "Name unknown"
-    let address = person.value(forKey: "address") ?? "Address unknown"
-    cell.textLabel?.text = "\(name) -- \(address)"
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! TargetCollectionViewCell
+    
+    cell.nameLabel.text = person.value(forKey: "name") as! String?
+    cell.addressLabel.text = person.value(forKey: "address") as! String?
     
     return cell
   }
