@@ -21,11 +21,12 @@
  */
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView!
-  var people: [String] = []
+  var people: [NSManagedObject] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -72,7 +73,23 @@ class ViewController: UIViewController {
   }
 
   func save(name: String) {
-    people.append(name)
+    
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+      return
+    }
+    
+    let managedContex = appDelegate.persistentContainer.viewContext
+    
+    let entity = NSEntityDescription.entity(forEntityName: "Person", in: managedContex)!
+    let person = NSManagedObject(entity: entity, insertInto: managedContex)
+    person.setValue(name, forKey: "name")
+    
+    do {
+      try managedContex.save()
+      people.append(person)
+    } catch let error as NSError {
+      print(error)
+    }
   }
 }
 
@@ -90,9 +107,9 @@ extension ViewController: UITableViewDataSource {
     let cell = tableView.dequeueReusableCell(withIdentifier: "Cell",
                                              for: indexPath)
     
-    let name = people[indexPath.row]
+    let person = people[indexPath.row]
     
-    cell.textLabel?.text = name
+    cell.textLabel?.text = person.value(forKey: "name") as! String?
     return cell
   }
 }
