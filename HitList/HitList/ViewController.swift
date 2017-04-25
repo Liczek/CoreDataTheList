@@ -25,13 +25,15 @@ import CoreData
 
 class ViewController: UIViewController {
   
-  
+  var imagePickerIndexPath = IndexPath(item: 0, section: 0)
 
   @IBOutlet weak var collectionView: UICollectionView!
   var people: [Person] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    collectionView.delegate = self
 
     title = "The List"
     let layout = UICollectionViewFlowLayout()
@@ -161,7 +163,68 @@ extension ViewController: UICollectionViewDataSource {
     cell.addressLabel.text = person.address
     cell.ageLabel.text = String(person.age)
     cell.eyeColorView.backgroundColor = person.eyeColor as! UIColor?
-    
+    if let pictureData = person.picture {
+      cell.pictureImageView.image = UIImage(data: pictureData as Data)
+    }
     return cell
   }
 }
+
+extension ViewController: UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
+  imagePickerIndexPath = indexPath
+    
+    let pickerController = UIImagePickerController()
+    pickerController.delegate = self
+    self.navigationController?.present(pickerController, animated: true, completion: nil)
+    }
+  
+    
+}
+
+extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+      return
+    }
+    
+    let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+    let person = people[imagePickerIndexPath.row]
+    
+    person.picture = UIImagePNGRepresentation(image)! as NSData
+    
+    do {
+      try appDelegate.persistentContainer.viewContext.save()
+    } catch let error {
+      print(error)
+    }
+    
+    collectionView.reloadItems(at: [imagePickerIndexPath])
+    picker.dismiss(animated: true, completion: nil)
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
