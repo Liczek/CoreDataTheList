@@ -45,6 +45,46 @@ class ViewController: UIViewController {
     collectionView.contentInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
     
     collectionView.reloadData()
+    
+    let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ViewController.addPerson(_:)))
+    let filterBarButtonItem = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(ViewController.addFilter))
+    
+    navigationItem.rightBarButtonItems = [addBarButtonItem, filterBarButtonItem]
+  }
+  
+  func addFilter() {
+    let filterAlertController = UIAlertController(title: "Filters", message: nil, preferredStyle: .actionSheet)
+    
+    filterAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+    filterAlertController.addAction(UIAlertAction(title: "Show All", style: .default, handler:{ (action) in
+      self.reloadData()
+    }))
+    filterAlertController.addAction(UIAlertAction(title: "Ania only", style: .default, handler: { (action) in
+      
+      self.reloadData(friendsName: "Ania")
+      
+    }))
+    present(filterAlertController, animated: true, completion: nil)
+  }
+  
+  func reloadData(friendsName: String = "") {
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+      return
+    }
+    
+    let fetchRequest: NSFetchRequest<Person> = Person.fetchRequest()
+    if friendsName != "" {
+      fetchRequest.predicate = NSPredicate(format: "name = %@", friendsName)
+    }
+    
+    do {
+      let results = try appDelegate.persistentContainer.viewContext.fetch(fetchRequest)
+      people = results
+      collectionView.reloadData()
+    } catch let error as NSError {
+      print(error)
+    }
+    
   }
 
   override func viewWillAppear(_ animated: Bool) {
