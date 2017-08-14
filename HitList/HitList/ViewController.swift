@@ -77,6 +77,13 @@ class ViewController: UIViewController {
       fetchRequest.predicate = NSPredicate(format: "name = %@", friendsName)
     }
     
+    let sortDescritorName = NSSortDescriptor(key: #keyPath(Person.name),
+                                             ascending: true,
+                                             selector: #selector(NSString.caseInsensitiveCompare(_:)))
+    let sortDescriptorAdress = NSSortDescriptor(key: #keyPath(Person.address), ascending: true)
+    fetchRequest.sortDescriptors = [sortDescritorName, sortDescriptorAdress]
+    
+    
     do {
       let results = try appDelegate.persistentContainer.viewContext.fetch(fetchRequest)
       people = results
@@ -134,6 +141,7 @@ class ViewController: UIViewController {
     alert.textFields?[0].placeholder = "Name"
     alert.textFields?[1].placeholder = "Address"
     alert.textFields?[2].placeholder = "Age"
+    alert.textFields?[2].autocapitalizationType = .words
     alert.textFields?[3].placeholder = "Eye Color"
 
     
@@ -154,8 +162,8 @@ class ViewController: UIViewController {
       return UIColor.gray
     case "Brown":
       return UIColor.brown
-    case "Purple":
-      return UIColor.purple
+    case "Orange":
+      return UIColor.orange
     default:
       return UIColor.blue
     }
